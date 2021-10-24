@@ -11,11 +11,13 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        Debug.Log(rb.velocity);
         rb.AddForce(inputDirection * speed * Time.deltaTime);
     }
     private void OnMove(InputValue _value)
     {
         Vector2 inputMouvement = _value.Get<Vector2>();
         inputDirection = new Vector3(inputMouvement.x, 0, inputMouvement.y);
+        
     }
 }
