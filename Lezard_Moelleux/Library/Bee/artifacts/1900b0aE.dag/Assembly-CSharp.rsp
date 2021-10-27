@@ -320,7 +320,15 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/VSSettingsProvider.ref.dll"
 "Assets/Inputs/Player_Input.cs"
+"Assets/Scripts/AIStateMachine/AIAttackState.cs"
+"Assets/Scripts/AIStateMachine/AIBaseState.cs"
+"Assets/Scripts/AIStateMachine/AIDetectState.cs"
+"Assets/Scripts/AIStateMachine/AIFollowState.cs"
+"Assets/Scripts/AIStateMachine/AIIdleState.cs"
+"Assets/Scripts/AIStateMachine/AIPatroleState.cs"
+"Assets/Scripts/AIStateMachine/AIStateManager.cs"
 "Assets/Scripts/PlayerController.cs"
+"Assets/Scripts/ScriptableObject/EnemyData.cs"
 -langversion:8.0
 
 /deterministic
