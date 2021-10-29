@@ -1,28 +1,38 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class AIPatroleState : AIBaseState
 {
-    private NavMeshAgent agent;
-
     int goTo;
 
-    public override void EnterState(AIStateManager AI, Animator anim, NavMeshAgent _agent)
+    public override void EnterState(AIStateManager AI, Animator anim)
     {
+        if (AI.type == AIStateManager.TYPE.STATIC)
+        {
+            anim.SetBool("isPatrolling", false);
+            AI.agent.isStopped = true;
+        }
+        else
+        {
+            anim.SetBool("isPatrolling", true);
+            AI.agent.isStopped = false;
+        }
+
+        anim.SetBool("isFollowing", false);
+        anim.SetBool("isAttacking", false);
+
         goTo = 0;
-        agent = _agent;
     }
 
     public override void UpdateState(AIStateManager AI, Animator anim, Transform[] way)
     {
-        anim.SetBool("isPatrolling", true);
+        if (HasDetected(AI))
+            AI.SwitchState(AI.followState);
 
         if (AI.type == AIStateManager.TYPE.FULL_PATROL)
         {
-            if (Vector3.Distance(agent.transform.position, way[goTo].position) <= .4f)
+            if (Vector3.Distance(AI.agent.transform.position, way[goTo].position) <= .4f)
             {
                 if (goTo < way.Length - 1)
                     goTo++;
@@ -30,12 +40,12 @@ public class AIPatroleState : AIBaseState
                     goTo = 0;
             }
 
-            agent.SetDestination(way[goTo].position);
+            AI.agent.SetDestination(way[goTo].position);
         }
-
-        if (Vector3.Distance(agent.transform.position, AI.player.transform.position) <= AI.ed.detectionDistance)
-            AI.SwitchState(AI.detectState);
-
+        else if (AI.type == AIStateManager.TYPE.STATIC)
+        {
+            AI.transform.eulerAngles = new Vector3(0, AI.transform.eulerAngles.y + .2f, 0);
+        }
     }
 
 }

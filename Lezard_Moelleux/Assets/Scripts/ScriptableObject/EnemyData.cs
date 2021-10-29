@@ -6,4 +6,5 @@ using UnityEngine;
 public class EnemyData : ScriptableObject
 {
     public float detectionDistance = 0;
+    public float attackDistance = 0;
 }

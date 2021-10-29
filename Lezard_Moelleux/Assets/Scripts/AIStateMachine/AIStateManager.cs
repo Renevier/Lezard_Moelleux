@@ -7,12 +7,13 @@ public class AIStateManager : MonoBehaviour
 {
     public enum TYPE
     {
-        HALF_PATROL,
+        STATIC,
         FULL_PATROL,
         RANDOM_PATROL
     }
 
-    [SerializeField] public TYPE type;
+    public float speed;
+    public TYPE type;
     [SerializeField] private Transform[] way;
     [SerializeField] private Animator anim;
     public EnemyData ed;
@@ -24,15 +25,14 @@ public class AIStateManager : MonoBehaviour
     public AIPatroleState patroleState = new AIPatroleState();
     public AIFollowState followState = new AIFollowState();
     public AIAttackState attackState = new AIAttackState();
-    public AIDetectState detectState = new AIDetectState();
 
-    [SerializeField] protected NavMeshAgent agent = null;
+    public NavMeshAgent agent = null;
 
     private void Start()
     {
         currentState = idleState;
 
-        currentState.EnterState(this, anim, agent);
+        currentState.EnterState(this, anim);
     }
 
     private void Update()
@@ -44,12 +44,13 @@ public class AIStateManager : MonoBehaviour
     {
         currentState = state;
 
-        state.EnterState(this, anim, agent);
+        state.EnterState(this, anim);
     }
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, ed.detectionDistance);
+        Gizmos.DrawWireSphere(transform.position, ed.attackDistance);
     }
 }

@@ -322,7 +322,6 @@
 "Assets/Inputs/Player_Input.cs"
 "Assets/Scripts/AIStateMachine/AIAttackState.cs"
 "Assets/Scripts/AIStateMachine/AIBaseState.cs"
-"Assets/Scripts/AIStateMachine/AIDetectState.cs"
 "Assets/Scripts/AIStateMachine/AIFollowState.cs"
 "Assets/Scripts/AIStateMachine/AIIdleState.cs"
 "Assets/Scripts/AIStateMachine/AIPatroleState.cs"
